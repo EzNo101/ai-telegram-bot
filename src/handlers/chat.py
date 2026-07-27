@@ -16,6 +16,9 @@ async def chat_handler(message: Message, bot: Bot):
     if not message.text:
         await message.answer("Please send a text message.")
         return
+    user_id = message.from_user.id  # type: ignore
+    username = message.from_user.username  # type: ignore
+    print(f"Received message from user {username} (ID: {user_id})")
 
     try:
         await bot.send_message_draft(
