@@ -26,7 +26,7 @@ async def chat_handler(message: Message, bot: Bot):
     except TelegramRetryAfter as e:
         print(f"Rate limit exceeded. Retry after {e.retry_after} seconds.")
         await asyncio.sleep(e.retry_after)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Error occurred while sending message draft: {e}")
     full_text = ""
     async for chunk in chat_service.generate_response(message.text):
@@ -36,6 +36,6 @@ async def chat_handler(message: Message, bot: Bot):
             draft_id=message.message_id,
             text=full_text,
         )
-        await asyncio.sleep(0.2)
+        await asyncio.sleep(0.5)
 
     await message.answer(full_text)
