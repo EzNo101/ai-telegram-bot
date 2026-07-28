@@ -18,7 +18,10 @@ async def chat_handler(message: Message, bot: Bot):
         return
     user_id = message.from_user.id  # type: ignore
     username = message.from_user.username  # type: ignore
-    print(f"Received message from user {username} (ID: {user_id})")
+    chat_id = message.chat.id  # type: ignore
+    print(
+        f"Received message from user {username} (ID: {user_id}, chat ID: {chat_id}): {message.text}"
+    )
 
     try:
         await bot.send_message_draft(
