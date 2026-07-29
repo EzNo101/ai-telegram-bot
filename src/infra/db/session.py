@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from collections.abc import AsyncGenerator
 
-from src.config import settings
+from core.config import settings
 
 engine: AsyncEngine = create_async_engine(
     url=settings.DB_URL,
