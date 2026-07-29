@@ -4,3 +4,11 @@ class UserAlreadyExistsError(Exception):
 
 class UserNotFoundError(Exception):
     """Raised when a user is not found in the database."""
+
+
+class ChatNotFoundError(Exception):
+    """Raised when a chat is not found in the database."""
+
+
+class ChatAlreadyExistsError(Exception):
+    """Raised when a chat already exists in the database."""

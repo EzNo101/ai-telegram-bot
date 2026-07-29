@@ -14,11 +14,11 @@ class ChatRepository:
         await self.session.refresh(chat)
         return chat
 
-    async def get_chat_by_id(self, chat_id: int) -> Chat | None:
+    async def get_by_id(self, chat_id: int) -> Chat | None:
         result = await self.session.execute(select(Chat).where(Chat.id == chat_id))
         return result.scalar_one_or_none()
 
-    async def get_chat_by_user_id(self, user_id: int) -> list[Chat]:
+    async def get_by_user_id(self, user_id: int) -> list[Chat]:
         result = await self.session.execute(select(Chat).where(Chat.user_id == user_id))
         return list(result.scalars().all())
 
