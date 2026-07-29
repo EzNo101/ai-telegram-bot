@@ -8,9 +8,9 @@ class ChatRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def create_chat(self, chat: Chat) -> Chat:
+    async def create(self, chat: Chat) -> Chat:
         self.session.add(chat)
-        await self.session.commit()
+        await self.session.flush()
         await self.session.refresh(chat)
         return chat
 
@@ -28,4 +28,3 @@ class ChatRepository:
 
     async def delete(self, chat: Chat) -> None:
         await self.session.delete(chat)
-        await self.session.commit()

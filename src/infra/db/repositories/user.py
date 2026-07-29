@@ -21,17 +21,13 @@ class UserRepository:
     async def create(self, telegram_id: int, username: str | None) -> User:
         user = User(telegram_id=telegram_id, username=username)
         self.session.add(user)
-        await self.session.commit()
+        await self.session.flush()
         await self.session.refresh(user)
         return user
 
-    async def update_username(self, user: User, new_username: str | None) -> User:
+    async def update_username(self, user: User, new_username: str | None) -> None:
         user.username = new_username
         self.session.add(user)
-        await self.session.commit()
-        await self.session.refresh(user)
-        return user
 
     async def delete(self, user: User) -> None:
         await self.session.delete(user)
-        await self.session.commit()

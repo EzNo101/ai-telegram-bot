@@ -12,3 +12,7 @@ class ChatNotFoundError(Exception):
 
 class ChatAlreadyExistsError(Exception):
     """Raised when a chat already exists in the database."""
+
+
+class MessageNotFoundError(Exception):
+    """Raised when a message is not found in the database."""
