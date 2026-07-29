@@ -22,10 +22,10 @@ class ChatRepository:
         result = await self.session.execute(select(Chat).where(Chat.user_id == user_id))
         return list(result.scalars().all())
 
-    async def get_all_chats(self) -> list[Chat]:
+    async def get_all(self) -> list[Chat]:
         result = await self.session.execute(select(Chat))
         return list(result.scalars().all())
 
-    async def delete_chat(self, chat: Chat) -> None:
+    async def delete(self, chat: Chat) -> None:
         await self.session.delete(chat)
         await self.session.commit()

@@ -24,3 +24,19 @@ class ChatService:
         if not chats:
             raise ChatNotFoundError("No chats found for the user")
         return chats
+
+    async def get_all(self) -> list[Chat]:
+        chats = await self.chat_repo.get_all()
+        if not chats:
+            raise ChatNotFoundError("No chats found")
+        return chats
+
+    # in future: make more complex logic for creating a chat, e.g., checking if a chat with the same name already exists for the user
+    async def create(self, chat: Chat) -> Chat:
+        existing_chats = await self.chat_repo.get_by_user_id(chat.user_id)
+        if existing_chats:
+            raise ChatAlreadyExistsError("Chat already exists for the user")
+        return await self.chat_repo.create_chat(chat)
+
+    async def delete(self, chat: Chat) -> None:
+        await self.chat_repo.delete(chat)
